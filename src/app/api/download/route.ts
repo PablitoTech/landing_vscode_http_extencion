@@ -5,10 +5,7 @@ import fs from 'fs';
 const VSIX_FILENAME = 'spring-http-generator-0.0.2.vsix';
 
 export async function GET() {
-  // The web/ folder is inside the monorepo root.
-  // process.cwd() in Next.js points to the web/ directory,
-  // so we go one level up to reach the extension root.
-  const filePath = path.resolve(process.cwd(), '..', 'dist', VSIX_FILENAME);
+  const filePath = path.resolve(process.cwd(), VSIX_FILENAME);
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json(
