@@ -17,7 +17,9 @@ export default function FeedbackSection({ lang, t, initialFeedbacks }: Props) {
   const fb = t.feedback;
 
   function handleNewFeedback(feedback: Feedback) {
-    setFeedbacks(prev => [feedback, ...prev]);
+    if (!feedback.is_private) {
+      setFeedbacks(prev => [feedback, ...prev]);
+    }
   }
 
   return (
