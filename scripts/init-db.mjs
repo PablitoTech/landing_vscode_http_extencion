@@ -42,10 +42,18 @@ async function init() {
         type       VARCHAR(50)  NOT NULL CHECK (type IN ('bug', 'feature', 'general', 'praise')),
         message    TEXT         NOT NULL,
         rating     INTEGER      CHECK (rating BETWEEN 1 AND 5),
+        is_private BOOLEAN      NOT NULL DEFAULT FALSE,
         created_at TIMESTAMPTZ  DEFAULT NOW()
       )
     `);
     console.log('Table feedbacks ready.');
+
+    // Migration: add is_private to existing tables that don't have it yet
+    await client.query(`
+      ALTER TABLE vscode_http_extencion_feedbacks.feedbacks
+      ADD COLUMN IF NOT EXISTS is_private BOOLEAN NOT NULL DEFAULT FALSE
+    `);
+    console.log('Column is_private ensured.');
 
     console.log('\nDatabase initialized successfully.');
   } finally {

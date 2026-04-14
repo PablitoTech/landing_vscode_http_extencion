@@ -131,6 +131,8 @@ const translations = {
         successMsg: 'Feedback submitted — thank you!',
         errorName: 'Please enter your name.',
         errorMessage: 'Please write your feedback.',
+        privateLabel: 'Keep private',
+        privateHint: 'Your feedback will only be visible to the admin, not publicly.',
       },
     },
     footer: {
@@ -255,6 +257,8 @@ const translations = {
         successMsg: '¡Comentario enviado — gracias!',
         errorName: 'Por favor escribe tu nombre.',
         errorMessage: 'Por favor escribe tu comentario.',
+        privateLabel: 'Mantener privado',
+        privateHint: 'Tu comentario solo será visible para el administrador, no públicamente.',
       },
     },
     footer: {

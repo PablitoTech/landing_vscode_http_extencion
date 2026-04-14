@@ -32,13 +32,16 @@ export interface Feedback {
   type: 'bug' | 'feature' | 'general' | 'praise';
   message: string;
   rating: number | null;
+  is_private: boolean;
   created_at: string;
 }
 
+/** Returns only public feedbacks — private ones are admin-only (DB level) */
 export async function getFeedbacks(): Promise<Feedback[]> {
   return query<Feedback>(
     `SELECT id, name, type, message, rating, created_at
      FROM vscode_http_extencion_feedbacks.feedbacks
+     WHERE is_private = FALSE
      ORDER BY created_at DESC
      LIMIT 50`
   );
@@ -49,12 +52,14 @@ export async function insertFeedback(data: {
   type: string;
   message: string;
   rating: number | null;
+  is_private: boolean;
 }): Promise<Feedback> {
   const rows = await query<Feedback>(
-    `INSERT INTO vscode_http_extencion_feedbacks.feedbacks (name, type, message, rating)
-     VALUES ($1, $2, $3, $4)
-     RETURNING *`,
-    [data.name, data.type, data.message, data.rating]
+    `INSERT INTO vscode_http_extencion_feedbacks.feedbacks
+       (name, type, message, rating, is_private)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING id, name, type, message, rating, is_private, created_at`,
+    [data.name, data.type, data.message, data.rating, data.is_private]
   );
   return rows[0];
 }

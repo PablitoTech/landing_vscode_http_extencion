@@ -25,6 +25,7 @@ export default function FeedbackForm({ t, onSubmitted }: Props) {
   const [type, setType] = useState('general');
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState<number | null>(null);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +43,7 @@ export default function FeedbackForm({ t, onSubmitted }: Props) {
       const res = await fetch('/api/feedbacks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), type, message: message.trim(), rating }),
+        body: JSON.stringify({ name: name.trim(), type, message: message.trim(), rating, is_private: isPrivate }),
       });
 
       if (!res.ok) {
@@ -57,6 +58,7 @@ export default function FeedbackForm({ t, onSubmitted }: Props) {
       setMessage('');
       setRating(null);
       setType('general');
+      setIsPrivate(false);
       setTimeout(() => setSuccess(false), 4000);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
@@ -167,6 +169,38 @@ export default function FeedbackForm({ t, onSubmitted }: Props) {
           {form.successMsg}
         </div>
       )}
+
+      {/* Private checkbox */}
+      <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all select-none ${
+        isPrivate ? 'border-fg-subtle/30 bg-canvas-subtle' : 'border-border hover:border-fg-subtle/30'
+      }`}>
+        <div className="relative shrink-0 mt-0.5">
+          <input
+            type="checkbox"
+            checked={isPrivate}
+            onChange={e => setIsPrivate(e.target.checked)}
+            className="sr-only"
+          />
+          <div className={`w-4 h-4 rounded flex items-center justify-center border transition-colors ${
+            isPrivate ? 'bg-fg-muted border-fg-muted' : 'bg-canvas border-border'
+          }`}>
+            {isPrivate && (
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="white">
+                <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
+              </svg>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-sm font-medium text-fg flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" className="text-fg-muted">
+              <path d="M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 0 0-5 0v2Z" />
+            </svg>
+            {form.privateLabel}
+          </span>
+          <span className="text-xs text-fg-muted leading-relaxed">{form.privateHint}</span>
+        </div>
+      </label>
 
       {/* Submit */}
       <button

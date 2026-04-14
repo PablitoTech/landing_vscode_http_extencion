@@ -14,7 +14,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, type, message, rating } = body;
+    const { name, type, message, rating, is_private } = body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
       type,
       message: message.trim(),
       rating: rating ?? null,
+      is_private: is_private === true,
     });
 
     return NextResponse.json(feedback, { status: 201 });
