@@ -50,11 +50,19 @@ const translations = {
       installHeading: 'How to install',
       installSteps: [
         'Download the .vsix file using the button above',
-        'Open VS Code and go to Extensions (Ctrl+Shift+X)',
+        'Open your editor and go to Extensions (Ctrl+Shift+X)',
         'Click the ··· menu → "Install from VSIX…"',
-        'Select the downloaded file and reload VS Code',
+        'Select the downloaded file and reload the editor',
         'Right-click any Spring Boot controller → Generate HTTP file',
       ],
+      installCli: {
+        heading: 'Or install via terminal',
+        subheading: 'Run this command after downloading the .vsix file',
+        tabs: ['Windows', 'Mac', 'Linux'],
+        copy: 'Copy',
+        copied: 'Copied!',
+        editors: ['VS Code', 'Cursor', 'Antigravity', 'Kiro'],
+      },
       items: [
         {
           title: 'Right-Click Generation',
@@ -166,11 +174,19 @@ const translations = {
       installHeading: 'Cómo instalar',
       installSteps: [
         'Descarga el archivo .vsix usando el botón de arriba',
-        'Abre VS Code y ve a Extensiones (Ctrl+Shift+X)',
+        'Abre tu editor y ve a Extensiones (Ctrl+Shift+X)',
         'Haz clic en el menú ··· → "Instalar desde VSIX…"',
-        'Selecciona el archivo descargado y recarga VS Code',
+        'Selecciona el archivo descargado y recarga el editor',
         'Clic derecho en cualquier controlador Spring Boot → Generar archivo .http',
       ],
+      installCli: {
+        heading: 'O instala desde la terminal',
+        subheading: 'Ejecuta este comando después de descargar el .vsix',
+        tabs: ['Windows', 'Mac', 'Linux'],
+        copy: 'Copiar',
+        copied: '¡Copiado!',
+        editors: ['VS Code', 'Cursor', 'Antigravity', 'Kiro'],
+      },
       items: [
         {
           title: 'Generación con Clic Derecho',

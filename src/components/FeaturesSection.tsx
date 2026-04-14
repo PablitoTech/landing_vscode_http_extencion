@@ -1,4 +1,5 @@
 import type { T } from '@/lib/i18n';
+import InstallCommands from './InstallCommands';
 
 // SVG icons indexed by position (same order as translation items)
 const ICONS = [
@@ -74,6 +75,8 @@ export default function FeaturesSection({ t }: Props) {
             </li>
           ))}
         </ol>
+
+        <InstallCommands t={t} />
       </div>
     </section>
   );
