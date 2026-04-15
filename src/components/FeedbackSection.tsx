@@ -23,7 +23,7 @@ export default function FeedbackSection({ lang, t, initialFeedbacks }: Props) {
   }
 
   return (
-    <section id="feedback" className="border-t border-border">
+    <section id="feedback">
       <div className="max-w-6xl mx-auto px-6 py-16 md:py-20">
         {/* Header */}
         <div className="text-center mb-12">

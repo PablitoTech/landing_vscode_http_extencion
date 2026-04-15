@@ -2,14 +2,19 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
 
-const VSIX_FILENAME = 'spring-http-generator-0.0.2.vsix';
+const RELEASES_DIR = 'releases';
+const LATEST_VERSION = '0.0.3';
 
-export async function GET() {
-  const filePath = path.resolve(process.cwd(), VSIX_FILENAME);
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const version = searchParams.get('version') ?? LATEST_VERSION;
+
+  const filename = `spring-http-generator-${version}.vsix`;
+  const filePath = path.resolve(process.cwd(), RELEASES_DIR, filename);
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json(
-      { error: 'Extension file not found. Run "vsce package" from the root first.' },
+      { error: `Version ${version} not found. Available versions are in the releases/ folder.` },
       { status: 404 }
     );
   }
@@ -21,7 +26,7 @@ export async function GET() {
     status: 200,
     headers: {
       'Content-Type': 'application/octet-stream',
-      'Content-Disposition': `attachment; filename="${VSIX_FILENAME}"`,
+      'Content-Disposition': `attachment; filename="${filename}"`,
       'Content-Length': String(fileSize),
       'Cache-Control': 'public, max-age=3600',
     },

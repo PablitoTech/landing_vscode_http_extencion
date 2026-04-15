@@ -10,16 +10,7 @@ export default function HeroSection({ lang, t }: Props) {
   const h = t.hero;
 
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            'linear-gradient(#e6edf3 1px, transparent 1px), linear-gradient(to right, #e6edf3 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-      />
+    <section className="relative overflow-hidden">
       {/* Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
 

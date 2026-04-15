@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { T } from '@/lib/i18n';
 
-const VSIX = 'spring-http-generator-0.0.2.vsix';
+const VSIX = 'spring-http-generator-0.0.3.vsix';
 
 const EDITORS: { label: string; cli: string; color: string }[] = [
   { label: 'VS Code',     cli: 'code',        color: 'text-[#007acc]' },
