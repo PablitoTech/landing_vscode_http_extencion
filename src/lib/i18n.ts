@@ -106,7 +106,7 @@ const translations = {
     releases: {
       heading: 'Version History',
       subheading: 'Download any previous release — each comes with its full changelog.',
-      backBtn: '← Back to home',
+      backBtn: 'Back to home',
       latestBadge: 'Latest',
       downloadBtn: 'Download .vsix',
       unavailableBtn: 'Not available',
@@ -313,7 +313,7 @@ const translations = {
     releases: {
       heading: 'Historial de Versiones',
       subheading: 'Descarga cualquier versión anterior — cada una incluye su changelog completo.',
-      backBtn: '← Volver al inicio',
+      backBtn: 'Volver al inicio',
       latestBadge: 'Última',
       downloadBtn: 'Descargar .vsix',
       unavailableBtn: 'No disponible',
